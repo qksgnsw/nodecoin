@@ -1,12 +1,13 @@
-# nodecoin
+NODECOIN
+========
 
-##### 데이터구조
+#### 데이터구조
 1. function으로 만든다.
 2. 구조를 통해 객체를 생성할 수 있다.
 3. 수많은 데이터를 컨트롤 할 수 있다.
 
 4. 예시.
-
+    <pre><code>
     function User(name, age) {
         this.name = name;
         this.age = age;
@@ -16,38 +17,42 @@
     .
     .
     var userN = new User('userN','..N')
+    </code></pre>
 
-##### 프로토타입 객체
+#### 프로토타입 객체
 1. (쉽게 말해서)함수에 속성이나 기능을 공통적으로 추가하는 객체.
 
 2. 예시
-
+    <pre><code>
     User.prototype.emailDomain = "@google.co.kr";
 
     User.prototype.getEmailAddress = function(){
         return this.name + this.age + this.emailDomain;
     }
+    </code></pre>
 
-##### 블록체인 데이터 구조 만들기
+#### 블록체인 데이터 구조 만들기
 1. 블록체인 데이터를 배열 구조로 만든다.
-
-    function Blockchain(){
-        this.chain = [];
-        this.newTransactions = [];
-    }
+    <pre><code>
+        function Blockchain(){
+            this.chain = [];
+            this.newTransactions = [];
+        }
+    </code></pre>
 
 2. 블록체인 데이터 구조를 이용
-
+    <pre><code>
     class Blockchain{
         constructor(){
             this.chain = [];
             this.pendingTransactions = [];
         }
     }
+    </code></pre>
 
-##### 블록체인 프로토타입 함수 만들기
+#### 블록체인 프로토타입 함수 만들기
 1. 블록 만들기
-
+<pre><code>
     Blockchain.prototype.createNewBlock = function(nonce, preiousBlockHash,hash){
         const newBlock = {
             index:this.chain.length + 1,
@@ -63,15 +68,17 @@
 
         return newBlock;
     }
+    </code></pre>
 
 2. 마지막 블록을 가져오는 함수 만들기
-
+<pre><code>
     Blockchain.prototype.getLastBlock = function(){
         return this.chain[this.chain.length - 1];
     }
+    </code></pre>
 
 3. 트랜잭션이 발생했을때 작동되는 함수 만들기
-
+<pre><code>
     Blockchain.prototype.createNewTranscation = function(amount,sender,recipient){
         const newTransaction = {
             amount:amount,
@@ -83,21 +90,23 @@
 
         return this.getLastBlock()['index'] + 1
     }
+    </code></pre>
 
 4. 해시 생성 함수 만들기
 
     * sha256 사용
-
+    <pre><code>
     Blockchain.prototype.hashBlock = function(previousBlockHash, currentBlockData, nonce){
         const dataAsString = previousBlockHash + nonce.toString() + JSON.stringify(currentBlockData);
         const hash = sha256(dataAsString)
         return hash
     }
+    </code></pre>
 
 5. 작업증명(POW)
     
     * pow 작업 함수 - 이전블록의 해쉬, 현재 블록 데이터와 nonce 값을 사용한다.
-
+    <pre><code>
     Blockchain.prototype.proofOfWork = function(previousBlockHash,currentBlockData){
         let nonce = 0;
         let hash = this.hashBlock(previousBlockHash,currentBlockData,nonce);
@@ -106,12 +115,13 @@
             hash = this.hashBlock(previousBlockHash,currentBlockData,nonce)
         }
     }
+    </code></pre>
 
     * proofOfWork 함수에 이전 hash와 현재블럭의 데이터를 담고 실행하여 nonce 값을 얻는다..
     * hashBlock 함수에 이전 hash와 현재 블럭의 데이터, proofOfWork의 결과물인 nonce를 담고 hash를 얻는다.
 
     * 예시
-
+    <pre><code>
     const previousBlockHash = "hash1"
     const currentBlockData = [
         {
@@ -139,6 +149,7 @@
     const nonce = blockchain.proofOfWork(previousBlockHash,currentBlockData)
     const hash = blockchain.hashBlock(previousBlockHash,currentBlockData,nonce)
     console.log('nonce : %s \n hash : %s', nonce, hash)
+    </code></pre>
 
     * 결과
     nonce : 252798 
@@ -160,5 +171,5 @@
 9. 노드들 네트워크 참여하기
     
     * 진행중
-    * https://abc1211.tistory.com/526?category=1003529
+    * <https://abc1211.tistory.com/526?category=1003529/>
 
