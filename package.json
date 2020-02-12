@@ -2,7 +2,7 @@
   "name": "nodecoin",
   "version": "1.0.0",
   "description": "nodecoin, the most awesome coind made in NodeJS",
-  "repository": "https://github.com/banhun/nodecoin.git",
+  "repository": "https://github.com/qksgnsw/nodecoin.git",
   "main": "index.js",
   "author": "Hun <qksgns0416@naver.com>",
   "license": "MIT",
