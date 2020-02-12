@@ -1,0 +1,28 @@
+{
+  "name": "nodecoin",
+  "version": "1.0.0",
+  "description": "nodecoin, the most awesome coind made in NodeJS",
+  "repository": "https://github.com/banhun/nodecoin.git",
+  "main": "index.js",
+  "author": "Hun <qksgns0416@naver.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "nodemon test.js",
+    "start": "nodemon networkNode.js",
+    "node1": "nodemon networkNode.js 3001",
+    "node2": "nodemon networkNode.js 3002",
+    "node3": "nodemon networkNode.js 3003",
+    "node4": "nodemon networkNode.js 3004",
+    "node5": "nodemon networkNode.js 3005",
+    "node6": "nodemon networkNode.js 3006"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
+    "sha256": "^0.2.0",
+    "uuid": "^3.4.0"
+  }
+}
